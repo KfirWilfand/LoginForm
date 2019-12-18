@@ -1,0 +1,102 @@
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script type='text/javascript'>
+$( document ).ready(function() {
+	/* attach a submit handler to the form */
+	$("#main-form").submit(function(event) {
+	
+	  /* stop form from submitting normally */
+	  event.preventDefault();
+	
+	  /* get the action attribute from the <form action=""> element */
+	  var $form = $( this ), url = $form.attr( 'action' );
+	
+	  /* Send the data using post with element id name and name2*/
+	  var posting = $.post( url, { name: $('#name').val()} );
+	
+	  /* Alerts the results */
+	  posting.done(function( data ) {
+		alert('success');
+	  });
+	});
+
+});
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up Page</title>
+   <!--Made with love by Mutiullah Samim -->
+   
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="./styles/loginForm.css">
+</head>
+<body>
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Sign Up</h3>
+			</div>
+			<div class="card-body">
+				<form method="post" id="main-form">
+					<div class="input-group form-group">
+						<input type="text" class="form-control" placeholder="*Full name" name="fullName">
+                    </div>
+                    <div class="input-group form-group">
+						<input type="email" class="form-control" placeholder="*Email address" name="email">
+                    </div>
+
+					  <div class="form-group">
+						<label for="controlSelect">Select concerning:</label>
+						<select class="form-control" id="controlSelect" name="concerningSelection">
+						  <option>Forgot my password</option>
+						  <option>Don't need this service</option>
+						  <option>Change my username</option>
+						  <option>Other..</option>
+						</select>
+					  </div>
+                    <div class="input-group form-group">
+					<textarea rows="5" type="textarea" class="form-control" placeholder="*Subject" name="text"></textarea>
+                    </div>
+					<div class="form-group">
+						<input type="submit" value="Submit" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title">Modal title</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <p>Modal body text goes here.</p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-primary">Save changes</button>
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+</body>
+</html>
