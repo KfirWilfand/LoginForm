@@ -5,7 +5,7 @@ class LocalDb extends DbConnectionAbstract {
 
   constructor() {
     super();
-    this.users =   users = {
+    this.users = {
       kfir333: { fullName: "kfir", password: "1234" },
       david123: { fullName: "david", password: "1234" },
       run100100: { fullName: "run", password: "1234" }
