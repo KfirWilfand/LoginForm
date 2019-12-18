@@ -1,14 +1,15 @@
 const DbConnectionAbstract = require("./dbConnectionAbstract");
 
 class LocalDb extends DbConnectionAbstract {
-  users = {
-    kfir333: { fullName: "kfir", password: "1234" },
-    david123: { fullName: "david", password: "1234" },
-    run100100: { fullName: "run", password: "1234" }
-  };
+
 
   constructor() {
     super();
+    this.users =   users = {
+      kfir333: { fullName: "kfir", password: "1234" },
+      david123: { fullName: "david", password: "1234" },
+      run100100: { fullName: "run", password: "1234" }
+    };
   }
 
   connenct() {}
