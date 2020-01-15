@@ -1,5 +1,5 @@
 const DbConnectionAbstract = require("./dbConnectionAbstract");
-
+var passwordCryptoGenerator=require("../modules/handlers/cryptoJSHandler");
 class LocalDb extends DbConnectionAbstract {
 
 
@@ -29,12 +29,17 @@ class LocalDb extends DbConnectionAbstract {
     if (!this.isUserExist) return "User name is NOT exist";
     const user = users[userName]
 
-    if(user.password === userPassword) return user
+    var decryptedPass=passwordCryptoGenerator.decryptPassword(user.password);
+    
+    if(decryptedPass === userPassword) return user
     else return "Passwoard is worng!";
   }
 
   addNewUser(userName, userPassword){
-    this.getUsers()[userName] = { fullName: userName, password: userPassword }
+
+    var encryptedPass=passwordCryptoGenerator.encryptPassword(userPassword);
+
+    this.getUsers()[userName] = { fullName: userName, password: encryptedPass }
   }
 }
 
