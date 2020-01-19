@@ -1,6 +1,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="./js/verificationHandler.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
@@ -27,28 +28,36 @@
 			</div>
 			<div class="card-body">
 				<form method="POST">
+						<div class="verification-item display-none ver-item-email">* Email field should contain only email address</div>
+						<div class="verification-item display-none ver-item-email">* Must Include a Special Char(!, @, #, etc)</div>
 					<div class="input-group form-group">
-
+		
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username" name="userName">
+						<input type="text" id="email" onChange={verifyEmail();} class="form-control" placeholder="username" name="userName">
 						
-                    </div>
+					</div>
+					<div class="verification-item display-none ver-item-password">* Minimun 6 Characters</div>
+					<div class="verification-item display-none ver-item-password">* Must Include an Uppercase Char</div>
+					<div class="verification-item display-none ver-item-password">* Must Include an Lowercase Char</div>
+					<div class="verification-item display-none ver-item-password">* Must Include a Number</div>
+					<div class="verification-item display-none ver-item-password">* Must Include a Special Chars</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" id="password" onChange={verifyPassword();} class="form-control" placeholder="password" name="password">
+					</div>
+					<div class="verification-item display-none ver-item-re-password">* The passwords is NOT match!</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-						<input type="password" class="form-control" placeholder="password" name="password">
-                    </div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-                        </div>
-						<input type="password" class="form-control" placeholder="repeat password" name="rePassword">
+						<input type="password" id="re-password"  onChange={verifyRePassword();} class="form-control" placeholder="repeat password" name="rePassword">
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Sign Up" class="btn float-right login_btn">
+						<input id="btnSubmit" type="submit" value="Sign Up" class="btn float-right login_btn" disabled>
 					</div>
 				</form>
 			</div>

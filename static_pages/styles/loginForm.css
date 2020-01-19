@@ -10,6 +10,20 @@ height: 100%;
 font-family: 'Numans', sans-serif;
 }
 
+.box_red{
+    border: red solid 2px;
+}
+
+.verification-item{ 
+    color:red;
+    font-size: small;
+    font-style: normal;
+}
+
+.display-none{
+    display: none;
+}
+
 .container{
 height: 100%;
 align-content: center;

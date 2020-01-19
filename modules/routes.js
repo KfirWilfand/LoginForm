@@ -1,7 +1,6 @@
 const express = require("express");
 var bodyParser = require("body-parser");
 var emailHandler = require("./handlers/sendEmailHandler");
-var emailPassVerificationHandler=require("./handlers/emailPassVerificationHandler");
 const LocalDb = require("../dal/localDb");
 
 const app = express();
@@ -36,14 +35,9 @@ app.post("/signup", (req, res) => {
   if (req.body.password !== req.body.rePassword)
     return res.send("The password are NOT match");
 
-     authResult=emailPassVerificationHandler.verifyEmailPassword(req.body.userName,req.body.password);
+  db.addNewUser(req.body.userName, req.body.password);
 
-    if (typeof authResult == "string") {
-      return res.send(authResult);
-    } else{
-      db.addNewUser(req.body.userName, req.body.password);
-      res.redirect("/login");
-    }
+  res.redirect("/login");
 });
 
 //serving contact form
