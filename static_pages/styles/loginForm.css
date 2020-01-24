@@ -37,6 +37,10 @@ width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
+.card-data{
+    width: 1000px;
+}
+
 .social_icon span{
 font-size: 60px;
 margin-left: 10px;
