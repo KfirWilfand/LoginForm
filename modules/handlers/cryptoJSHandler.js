@@ -9,11 +9,10 @@ function encryptPassword(password){
 }
 
 
-function decryptPassword(){
+function decryptPassword(ciphertext){
     var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     return decryptedData;
-
 }
 
 

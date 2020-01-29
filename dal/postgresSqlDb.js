@@ -1,6 +1,7 @@
 const DbConnectionAbstract = require("./dbConnectionAbstract");
 const { Client } = require("pg");
 const schemaName = "login_form";
+var passwordCryptoGenerator = require("../modules/handlers/cryptoJSHandler");
 let client;
 
 class PostgresSqlDb extends DbConnectionAbstract {
@@ -37,7 +38,7 @@ class PostgresSqlDb extends DbConnectionAbstract {
   }
 
   isUserAuthenticate(userName, userPassword) {
-    let query = `select email, password  from ${schemaName}.users where email='${userName}' and password='${userPassword}'`;
+    let query = `select email, password  from ${schemaName}.users where email='${userName}'`;
     return new Promise(function(resolve, reject) {
       client.query(query, function(err, result) {
         if (err) {
@@ -45,8 +46,13 @@ class PostgresSqlDb extends DbConnectionAbstract {
           return reject(err);
         } else {
           if (result.rowCount > 0) {
-            console.log(`${result.rows[0].email} connected!`);
-            return resolve(true);
+            var decryptPassword = passwordCryptoGenerator.decryptPassword(
+              result.rows[0].password
+            );
+            if (decryptPassword == userPassword) {
+              console.log(`${result.rows[0].email} connected!`);
+              return resolve(true);
+            }                                                                             
           }
         }
         console.log(`worng password or username`);
@@ -56,6 +62,8 @@ class PostgresSqlDb extends DbConnectionAbstract {
   }
 
   addNewUser(userName, userPassword) {
+    var encryptedPass = passwordCryptoGenerator.encryptPassword(userPassword);
+
     let userPromise = this.getUsers();
 
     return new Promise(function(resolve, reject) {
@@ -73,7 +81,7 @@ class PostgresSqlDb extends DbConnectionAbstract {
             console.log(`user aleady exist!`);
             resolve(false);
           } else {
-            let query = `INSERT INTO ${schemaName}.users (email, password) VALUES ('${userName}', '${userPassword}');`;
+            let query = `INSERT INTO ${schemaName}.users (email, password) VALUES ('${userName}', '${encryptedPass}');`;
 
             client.query(query, function(err, result) {
               if (err) {
