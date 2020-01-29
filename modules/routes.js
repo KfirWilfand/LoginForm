@@ -69,6 +69,11 @@ app.get("/login", (req, res) => {
   }
 });
 
+app.get('/logout', function (req, res) {
+  delete req.session.authStatus;
+  res.redirect("/");
+});
+
 app.get("/data", (req, res) => {
   sess = req.session;
 
