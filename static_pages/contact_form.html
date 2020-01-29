@@ -39,8 +39,30 @@ $( document ).ready(function() {
 
 	<!--Custom styles-->
 	<link rel="stylesheet" type="text/css" href="./styles/loginForm.css">
+	<link rel="stylesheet" type="text/css" href="./styles/basicTabStyle.css">
 </head>
 <body>
+    <div class="container-fluid">
+		<div class="row top-links">
+		  <div class="col-md-4 d-flex justify-content-start p-0">
+			<ul class="nav nav-pills nav-fill">
+			  <li class="nav-item">
+				<a class="nav-link" href="/data">View</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link active" href="/contact">Contact Us</a>
+			  </li>
+			  </ul>
+		  </div>
+			<div class="col-md-8 d-flex justify-content-end p-0">
+			<ul class="nav nav-pills nav-fill">
+			  <li class="nav-item">
+				<a class="nav-link" href="/logout">Logout</a>
+			  </li>
+			  </ul>
+		  </div>
+		</div>
+	  </div>
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
