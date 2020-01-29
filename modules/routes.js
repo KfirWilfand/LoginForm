@@ -70,7 +70,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get('/logout', function (req, res) {
-  delete req.session.authStatus;
+  delete req.session.userName;
   res.redirect("/");
 });
 
