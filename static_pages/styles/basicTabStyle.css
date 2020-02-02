@@ -1,0 +1,37 @@
+.nav{
+  background-color:  rgba(46, 44, 44, 0.5) !important; 
+  height: auto;
+  color: white;
+}
+.nav-pills .nav-link:hover {
+    color: black;
+    background-color: #FFC312;
+}
+.top-links{
+    background-color: rgba(46, 44, 44, 0.5); 
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: black;
+    background-color: #FFC312;
+}
+
+.nav-pills .nav-link{
+    border-radius: 0;
+}
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+}
+a {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+.nav-link:hover{
+    color: black;
+    background-color: white;
+}
+.nav-link:focus, .nav-link:hover {
+    text-decoration: none;
+}

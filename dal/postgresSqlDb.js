@@ -52,7 +52,7 @@ class PostgresSqlDb extends DbConnectionAbstract {
             if (decryptPassword == userPassword) {
               console.log(`${result.rows[0].email} connected!`);
               return resolve(true);
-            }                                                                             
+            }
           }
         }
         console.log(`worng password or username`);
@@ -90,6 +90,33 @@ class PostgresSqlDb extends DbConnectionAbstract {
             });
             resolve(true);
           }
+        }
+      });
+    });
+  }
+
+  fetchData() {
+    let query = `select *  from ${schemaName}.user_location`;
+
+    return new Promise(function(resolve, reject) {
+      client.query(query, function(err, result) {
+        if (err) {
+          console.log(err.stack);
+          return reject(err);
+        } else {
+          let allData = [];
+
+          for (let j = 0; j < result.rowCount; j++) {
+            var item = result.rows[j];
+            allData.push({
+              email: item.email,
+              data1: item.data1,
+              data2: item.data2,
+              lat: item.lat,
+              long: item.long
+            });
+          }
+          return resolve(allData);
         }
       });
     });

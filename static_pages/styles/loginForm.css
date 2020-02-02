@@ -5,7 +5,7 @@
 html,body{
 background-image: url("../img/login-form-bg.jpg");
 background-size: cover;
-background-repeat: no-repeat;
+background-repeat: repeat-y;
 height: 100%;
 font-family: 'Numans', sans-serif;
 }
@@ -33,12 +33,16 @@ align-content: center;
 height: min-content;
 margin-top: auto;
 margin-bottom: auto;
-width: 400px;
+/* width: 400px; */
 background-color: rgba(0,0,0,0.5) !important;
 }
 
 .card-data{
     width: 1000px;
+}
+
+.card {
+color: white;
 }
 
 .social_icon span{

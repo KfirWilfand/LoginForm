@@ -84,6 +84,21 @@ app.get("/data", (req, res) => {
   }
 });
 
+app.get("/dataTable", (req, res) => {
+  sess = req.session;
+
+  if (sess.userName) {
+    data = db.fetchData();
+
+    data.then(result => {
+        res.json(result);
+    });
+  } else {
+    
+    res.redirect("/");
+  }
+});
+
 app.use(
   "/signup" || "/signup?res=bad",
   express.static(static_path + "/sign_up.html")
