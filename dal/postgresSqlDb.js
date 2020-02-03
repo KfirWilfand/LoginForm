@@ -27,7 +27,9 @@ class PostgresSqlDb extends DbConnectionAbstract {
 
     return new Promise(function(resolve, reject) {
       client.query(query, function(err, result) {
-        if (err) {
+        if (result.rowCount == 0) {
+          return resolve([]);
+        } else if (err) {
           console.log(err.stack);
           return reject(err);
         } else {
@@ -61,6 +63,28 @@ class PostgresSqlDb extends DbConnectionAbstract {
     });
   }
 
+  getUserByEmail(userName) {
+    let query = `select email, password  from ${schemaName}.users where email='${userName}'`;
+    return new Promise(function(resolve, reject) {
+      client.query(query, function(err, result) {
+        if (err) {
+          console.log(err.stack);
+          return reject(err);
+        } else {
+          if (result.rowCount > 0) {
+            var decryptPassword = passwordCryptoGenerator.decryptPassword(
+              result.rows[0].password
+            );
+
+            return resolve(decryptPassword);
+          }
+        }
+        console.log(`worng password or username`);
+        return resolve(false);
+      });
+    });
+  }
+
   addNewUser(userName, userPassword) {
     var encryptedPass = passwordCryptoGenerator.encryptPassword(userPassword);
 
@@ -68,9 +92,9 @@ class PostgresSqlDb extends DbConnectionAbstract {
 
     return new Promise(function(resolve, reject) {
       userPromise.then(result => {
-        if (result.length > 0) {
-          let isUserExist = false;
+        let isUserExist = false;
 
+        if (result.length > 0) {
           result.forEach(user => {
             if (user.email == userName) {
               isUserExist = true;

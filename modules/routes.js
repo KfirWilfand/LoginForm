@@ -69,7 +69,7 @@ app.get("/login", (req, res) => {
   }
 });
 
-app.get('/logout', function (req, res) {
+app.get("/logout", function(req, res) {
   delete req.session.userName;
   res.redirect("/");
 });
@@ -91,10 +91,9 @@ app.get("/dataTable", (req, res) => {
     data = db.fetchData();
 
     data.then(result => {
-        res.json(result);
+      res.json(result);
     });
   } else {
-    
     res.redirect("/");
   }
 });
@@ -115,20 +114,69 @@ app.post("/signup", (req, res) => {
 });
 
 //serving contact form
-app.use("/contact", express.static(static_path + "/contact_form.html"));
-app.post("/contact", (req, res) => {
-  const mailReceiver = "mytestkfir@gmail.com";
+app.get("/contact", (req, res) => {
+  sess = req.session;
 
+  if (sess.userName) {
+    res.sendFile(
+      path.join(__dirname, "/../", static_path, "/contact_form.html")
+    );
+  } else {
+    res.redirect("/");
+  }
+});
+
+app.post("/contact", (req, res) => {
   var mailOptions = {
+    to: "mytestkfir@gmail.com",
     from: req.body.email,
-    to: mailReceiver,
-    subject: req.body.concerningSelection,
-    text: req.body.fullName + "/n" + req.body.subject
+    subject: `[Contact Us Form]: ${req.body.concerningSelection}`,
+    html: `<h1>${req.body.concerningSelection}</h1><p>Full Name: ${req.body.fullName}</p><p>Email: ${req.body.email}</p><p>Content: ${req.body.text}</p>`
   };
 
-  var isMailSent = emailHandler.sendEmail(mailOptions);
+  console.log(mailOptions);
+  var isMailSentPromise = emailHandler.sendEmail(mailOptions);
+  isMailSentPromise.then(result => {
+    if (result) {
+      res.redirect("/contact?res=success");
+    } else {
+      res.redirect("/contact?res=error");
+    }
+  });
+});
 
-  if (isMailSent) res.redirect("/");
+app.get("/forgotPassword", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "/../", static_path, "/forgot_password.html")
+  );
+});
+
+app.post("/forgotPassword", (req, res) => {
+  let userPromise = db.getUserByEmail(req.body.email);
+  userPromise.then(result => {
+    if (result) {
+      var mailOptions = {
+        to: req.body.email,
+        subject: `Client-Server Final-Project: account password reset`,
+        html:
+          "<h1>Password reset</h1>" +
+          `<p><h3>Here is your password: ${result}</h3></p></br>` +
+          "<h3>Thanks,</h3>" +
+          "<h3>The Client-Server lab account team</h3>"
+      };
+
+      var isMailSentPromise = emailHandler.sendEmail(mailOptions);
+      isMailSentPromise.then(result => {
+        if (result) {
+          res.redirect("/forgotPassword?res=success");
+        } else {
+          res.redirect("/forgotPassword?res=errorSent");
+        }
+      });
+    } else {
+      res.redirect("/forgotPassword?res=userNotExist");
+    }
+  });
 });
 
 module.exports = app;
