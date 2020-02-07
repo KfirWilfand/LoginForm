@@ -128,7 +128,7 @@ app.get("/contact", (req, res) => {
 
 app.post("/contact", (req, res) => {
   var mailOptions = {
-    to: "mytestkfir@gmail.com",
+    to: "clientserverfinalproj@cnetmail.net",
     from: req.body.email,
     subject: `[Contact Us Form]: ${req.body.concerningSelection}`,
     html: `<h1>${req.body.concerningSelection}</h1><p>Full Name: ${req.body.fullName}</p><p>Email: ${req.body.email}</p><p>Content: ${req.body.text}</p>`
