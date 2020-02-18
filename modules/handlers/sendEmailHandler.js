@@ -2,11 +2,11 @@ var nodemailer = require("nodemailer");
 
 function sendEmail(mailOptions) {
   var transporter = nodemailer.createTransport({
-    host: "email-smtp.eu-central-1.amazonaws.com",
-    port: 465,
+    host: "smtp.mailtrap.io",
+    port: 587,
     auth: {
-      user: "ses-smtp-user.20200218-223305",
-      pass: "BE7Tvy0GNeZY/somDL9BQ77ldJ5wfCZJJz4LoCsZBYDp"
+      user: "88782c4b1d8271",
+      pass: "3543db6cc7cc43"
     }
   });
 
