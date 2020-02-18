@@ -2,11 +2,11 @@ var nodemailer = require("nodemailer");
 
 function sendEmail(mailOptions) {
   var transporter = nodemailer.createTransport({
-    host: "smtp.yandex.ru",
+    host: "email-smtp.eu-central-1.amazonaws.com",
     port: 465,
     auth: {
-      user: "mytestmyt@yandex.ru",
-      pass: "funfun100100"
+      user: "ses-smtp-user.20200218-223305",
+      pass: "BE7Tvy0GNeZY/somDL9BQ77ldJ5wfCZJJz4LoCsZBYDp"
     }
   });
 
