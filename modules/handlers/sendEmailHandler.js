@@ -2,10 +2,10 @@ var nodemailer = require("nodemailer");
 
 function sendEmail(mailOptions) {
   var transporter = nodemailer.createTransport({
-    host: "out.walla.co.il",
-    port: 587,
+    host: "smtp.yandex.ru",
+    port: 465,
     auth: {
-      user: "tempam@walla.co.il",
+      user: "mytestmyt@yandex.ru",
       pass: "funfun100100"
     }
   });
