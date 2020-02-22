@@ -11,15 +11,20 @@ function sendEmail(mailOptions) {
   });
 
   return new Promise(function(resolve, reject) {
-    transporter.sendMail(mailOptions, function(error, mailOptions) {
-      if (error) {
-        console.log(error);
-        reject(error);
-      } else {
-        console.log("Email sent: " + mailOptions.response);
-        resolve(mailOptions.response);
-      }
-    });
+    try {
+      transporter.sendMail(mailOptions, function(error, mailOptions) {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          console.log("Email sent: " + mailOptions.response);
+          resolve(mailOptions.response);
+        }
+      });
+    } catch (error) {
+      console.error(error) + " mail server refused!";
+      reject(error);
+    }
   });
 }
 

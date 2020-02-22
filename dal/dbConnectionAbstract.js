@@ -8,6 +8,9 @@ class DbConnectionAbstract {
   connenct() {}
   getUsers() {}
   isUserAuthenticate(userName, userPassword) {}
+  getUserByEmail(userName) {}
+  addNewUser(userName, userPassword) {}
+  fetchData() {}
 }
 
 module.exports = DbConnectionAbstract;
