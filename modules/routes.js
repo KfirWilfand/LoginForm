@@ -41,18 +41,6 @@ app.get("/", function(req, res) {
   }
 });
 
-app.get("/getUserName", function(req, res) {
-  sess = req.session;
-
-  //Session set when user Request our app via URL
-  console.log(sess.userName);
-  if (sess.userName) {
-    res.json({email: sess.userName});
-  } else {
-    res.json({email: "Add your email address"});
-  }
-});
-
 //serving authentication
 // app.use("/login", express.static(static_path + "/login.html"));
 app.post("/login" || "/login?res=bad", (req, res) => {
