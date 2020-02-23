@@ -88,7 +88,7 @@ app.get("/dataTable", (req, res) => {
   sess = req.session;
 
   if (sess.userName) {
-    data = db.fetchData();
+    data = db.fetchData(sess.userName);
 
     data.then(result => {
       res.json(result);

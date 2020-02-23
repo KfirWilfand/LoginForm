@@ -119,8 +119,8 @@ class PostgresSqlDb extends DbConnectionAbstract {
     });
   }
 
-  fetchData() {
-    let query = `select *  from ${schemaName}.user_location`;
+  fetchData(userName) {
+    let query = `select *  from ${schemaName}.user_location where email='${userName}'`;
 
     return new Promise(function(resolve, reject) {
       client.query(query, function(err, result) {

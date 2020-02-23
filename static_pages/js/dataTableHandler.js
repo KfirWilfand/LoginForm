@@ -4,8 +4,9 @@ let mapMarker;
 
 $.get("dataTable", function(data) {
   data.forEach(element => {
+    let text = `${element.data1}` + "," + `${element.data2}`;
     $("#table-content").append(
-      `<tr onClick={onRowDataClickHandle(${element.lat},${element.long})}>` +
+      `<tr onClick=onRowDataClickHandle(${element.lat},${element.long})>` +
         `<td>${element.email}</td>` +
         `<td>${element.data1}</td>` +
         `<td>${element.data2}</td>` +
@@ -14,7 +15,7 @@ $.get("dataTable", function(data) {
         "</tr>"
     );
 
-    points.push({ lat: element.lat, lng: element.long });
+    points.push({ lat: element.lat, lng: element.long ,text: text});
   });
 
   $("#data-table").DataTable({
@@ -33,21 +34,25 @@ function initMap() {
     center: points[1]
   });
 
-  // // The marker, positioned at Uluru
-  // points.forEach(point => {
-  //   new google.maps.Marker({ position: point, map: map });
-  // });
+  // The marker, positioned at Uluru
+  points.forEach(point => {
+    new google.maps.Marker({
+      position: point,
+      map: map,
+      label: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: "14px",
+        text: point.text
+      }
+    });
+  });
 }
 
 function onRowDataClickHandle(newLat, newLng) {
   if (mapMarker) {
     mapMarker.setMap(null);
   }
-  
-  mapMarker = new google.maps.Marker({
-    position: { lat: newLat, lng: newLng },
-    map: map
-  });
 
   map
     .setCenter({
