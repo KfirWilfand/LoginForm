@@ -58,6 +58,5 @@ function onRowDataClickHandle(newLat, newLng) {
     .setCenter({
       lat: newLat,
       lng: newLng
-    })
-    .setZoom({ zoom: 8 });
+    });
 }
